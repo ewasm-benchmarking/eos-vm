@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
       auto t1 = std::chrono::high_resolution_clock::now();
       backend_t bkend( code );
       auto t2 = std::chrono::high_resolution_clock::now();
-      std::cout << "Startup " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1).count() << "\n";
+      std::cout << "Startup " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1).count() << "ns\n";
 
       bkend.set_wasm_allocator( &wa );
 
@@ -32,11 +32,11 @@ int main(int argc, char** argv) {
       bkend.initialize();
       bkend.execute_all(null_watchdog());
       auto t4 = std::chrono::high_resolution_clock::now();
-      std::cout << "Execution " << std::chrono::duration_cast<std::chrono::nanoseconds>(t4-t3).count() << "\n";
+      std::cout << "Execution " << std::chrono::duration_cast<std::chrono::nanoseconds>(t4-t3).count() << "ns\n";
 
    } catch ( const eosio::vm::exception& ex ) {
       auto t4 = std::chrono::high_resolution_clock::now();
-      std::cout << "Execution " << std::chrono::duration_cast<std::chrono::nanoseconds>(t4-t3).count() << "\n";
+      std::cout << "Execution " << std::chrono::duration_cast<std::chrono::nanoseconds>(t4-t3).count() << "ns\n";
       std::cerr << "eos-vm interpreter error\n";
       std::cerr << ex.what() << " : " << ex.detail() <<  "\n";
    }
